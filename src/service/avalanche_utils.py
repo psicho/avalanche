@@ -5,7 +5,6 @@ from web3.middleware import geth_poa_middleware
 from src.service.settings import config
 from src.service.models import BlockchainName
 from decimal import Decimal
-from fastapi.responses import JSONResponse
 
 
 def normalize_value(value):
@@ -45,7 +44,3 @@ def get_balance_back(address: str, block: int, blockchain: str):
     balance = web3.eth.get_balance(address, block)
 
     return balance
-
-
-# print(get_contract_events(21753727))
-print(get_balance_back('0x9AA0B87c5af1a8dED6819b1e73c8cD6F59c20Cb4', 21753992, 'avalanche'))
