@@ -1,7 +1,11 @@
-
 fastapi
 pydantic
 uvicorn
 web3
 httpx
 tenacity
+pytest
+aredis
+pytest-mock
+respx
+coverage

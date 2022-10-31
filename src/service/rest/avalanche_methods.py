@@ -26,7 +26,7 @@ async def get_balance(address: str = Path(None, description="Avalanche account a
 
 
 @router.get(
-    config.API_ROOT + "/balance/{from_block}/",
+    config.API_ROOT + "/events/{from_block}/",
     responses={
         200: {"model": EventsResponse},
         404: {"model": ErrorResponse},
@@ -35,5 +35,5 @@ async def get_balance(address: str = Path(None, description="Avalanche account a
     },
 )
 async def get_events(from_block: int = Path(None, description="Start block number"),
-                      ) -> EventsResponse:
+                     ) -> EventsResponse:
     return get_contract_events(from_block)
