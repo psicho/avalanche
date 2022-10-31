@@ -3,9 +3,9 @@ import json
 import httpx
 import pytest
 from fastapi.testclient import TestClient
-from src.service.server import app
-from src.service.settings import config
-from src.service.rest import avalanche_methods
+from service.server import app
+from service.settings import config
+from service.rest import avalanche_methods
 
 
 app.include_router(avalanche_methods.router)

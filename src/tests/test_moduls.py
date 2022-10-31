@@ -4,13 +4,13 @@ import httpx
 import pytest
 from decimal import Decimal
 from fastapi.testclient import TestClient
-from src.service.server import app
+from service.server import app
 from web3 import Web3
 from web3.middleware import geth_poa_middleware
-from src.service.models import BlockchainName
-from src.service.settings import config
-from src.service.rest import avalanche_methods
-from src.service.avalanche_utils import (
+from service.models import BlockchainName
+from service.settings import config
+from service.rest import avalanche_methods
+from service.avalanche_utils import (
     get_balance_back, get_contract_events,
     normalize_value, get_blockchain_w3,
 )

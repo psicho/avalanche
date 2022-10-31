@@ -3,7 +3,7 @@ from typing import Optional
 from fastapi import APIRouter, Query, Path
 
 from ..models import BalanceResponse, ErrorResponse, EventsResponse
-from src.service.settings import config
+from service.settings import config
 from ..avalanche_utils import get_balance_back, get_contract_events
 
 router = APIRouter()

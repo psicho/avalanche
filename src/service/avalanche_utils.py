@@ -2,8 +2,8 @@ import json
 import requests
 from web3 import Web3
 from web3.middleware import geth_poa_middleware
-from src.service.settings import config
-from src.service.models import BlockchainName
+from service.settings import config
+from service.models import BlockchainName
 from decimal import Decimal
 
 
