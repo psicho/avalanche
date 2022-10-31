@@ -13,6 +13,8 @@ router = APIRouter()
     config.API_ROOT + "/balance/{blockchain}/{block}/{address}/",
     responses={
         200: {"model": BalanceResponse},
+        404: {"model": ErrorResponse},
+        400: {"model": ErrorResponse},
         500: {"model": ErrorResponse},
     },
 )
@@ -27,9 +29,11 @@ async def get_balance(address: str = Path(None, description="Avalanche account a
     config.API_ROOT + "/balance/{from_block}/",
     responses={
         200: {"model": EventsResponse},
+        404: {"model": ErrorResponse},
+        400: {"model": ErrorResponse},
         500: {"model": ErrorResponse},
     },
 )
-async def get_balance(from_block: int = Path(None, description="Start block number"),
+async def get_events(from_block: int = Path(None, description="Start block number"),
                       ) -> EventsResponse:
     return get_contract_events(from_block)
