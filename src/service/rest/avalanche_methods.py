@@ -2,48 +2,34 @@ from typing import Optional
 
 from fastapi import APIRouter, Query, Path
 
-from ..models import BalanceResponse, BalanceBlockResponse, ErrorResponse, BalanceBlockchainBlockResponse
+from ..models import BalanceResponse, ErrorResponse, EventsResponse
 from src.service.settings import config
-from ..avalanche_utils import get_avalanche_balance, get_avalanche_balance_block, get_blockchain_balance_block
+from ..avalanche_utils import get_balance_back, get_contract_events
 
 router = APIRouter()
 
 
 @router.get(
-    config.API_ROOT + "/balance/{address}/",
+    config.API_ROOT + "/balance/{blockchain}/{block}/{address}/",
     responses={
         200: {"model": BalanceResponse},
         500: {"model": ErrorResponse},
     },
 )
-async def get_balance(address: str = Path(None, description="Avalanche account address")) -> BalanceResponse:
-    return get_avalanche_balance(address)
-
-
-@router.get(
-    config.API_ROOT + "/balance/{block}/{address}/",
-    responses={
-        200: {"model": BalanceBlockResponse},
-        500: {"model": ErrorResponse},
-    },
-)
-async def get_balance(address: str = Path(None, description="Avalanche account address"),
-                      block: int = Path(None, description="Number of block")) -> BalanceBlockResponse:
-    return get_avalanche_balance_block(address, block)
-
-
-@router.get(
-    config.API_ROOT + "/balance/{blockchain}/{block}/{address}/",
-    responses={
-        200: {"model": BalanceBlockchainBlockResponse},
-        500: {"model": ErrorResponse},
-    },
-)
 async def get_balance(address: str = Path(None, description="Avalanche account address"),
                       block: int = Path(None, description="Number of block"),
-                      blockchain: int = Path(None, description="Blockchain name")
-                      ) -> BalanceBlockchainBlockResponse:
-    return get_blockchain_balance_block(address, block, blockchain)
+                      blockchain: str = Path(None, description="Blockchain name")
+                      ) -> BalanceResponse:
+    return get_balance_back(address, block, blockchain)
 
-# async def get_balance(address: str = Path(None, description="XRPL account address")) -> BalanceResponse:
-#     return await get_account_balance(address)
+
+@router.get(
+    config.API_ROOT + "/balance/{from_block}/",
+    responses={
+        200: {"model": EventsResponse},
+        500: {"model": ErrorResponse},
+    },
+)
+async def get_balance(from_block: int = Path(None, description="Start block number"),
+                      ) -> EventsResponse:
+    return get_contract_events(from_block)

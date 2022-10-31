@@ -9,20 +9,15 @@ class BlockchainName(str, Enum):
     Avalanche = "avalanche"
 
 
+class EventsResponse(BaseModel):
+    from_block: int = Field(None, description="from Block")
+
+
 class BalanceResponse(BaseModel):
     address: str = Field(None, description="Avalanche address")
-
-
-class BalanceBlockResponse(BaseModel):
-    address: str = Field(None, description="Avalanche address")
     block: int = Field(None, description="Block number")
-
-
-class BalanceBlockchainBlockResponse(BaseModel):
-    address: str = Field(None, description="Avalanche address")
-    block: int = Field(None, description="Block number")
-    # blockchain: str = Field(None, description="Blockchain select")
-    blockchain: BlockchainName = BlockchainName.Avalanche
+    blockchain: str = Field(None, description="Blockchain select")
+    # blockchain: BlockchainName = BlockchainName.Avalanche
 
 
 class ErrorResponse(BaseModel):
