@@ -17,9 +17,10 @@
 RUN [test/run_test.sh](test/run_test.sh)
 
 ### Local Run
-RUN [src/service/__main__.py](src/service/__main__.py)
+in src directory
+run: uvicorn service.server:app --reload
 
-url: [0.0.0.0:8920](http://0.0.0.0:8920/)
+url: [127.0.0.1:8000](http://127.0.0.1:8000 )
 
 ### Docker Run
 RUN [src/Dockerfile](src/Dockerfile)
