@@ -17,10 +17,12 @@
 RUN [test/run_test.sh](test/run_test.sh)
 
 ### Local Run
-in src directory
-run: uvicorn service.server:app --reload
+- **Run:** cd src/ uvicorn service.server:app --reload
 
-url: [127.0.0.1:8000](http://127.0.0.1:8000 )
+- Local Host address: [127.0.0.1:8000](http://127.0.0.1:8000)
 
 ### Docker Run
-RUN [src/Dockerfile](src/Dockerfile)
+- **Build:** cd src/ docker-compose build
+- **Run:** cd src/ docker-compose up
+- **Stop:** cd src/ docker-compose down
+- Local Host address: [127.0.0.1:8000](http://127.0.0.1:8000)
