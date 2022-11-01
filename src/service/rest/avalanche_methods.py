@@ -1,7 +1,4 @@
-from typing import Optional
-
-from fastapi import APIRouter, Query, Path
-
+from fastapi import APIRouter, Path
 from ..models import BalanceResponse, ErrorResponse, EventsResponse
 from service.settings import config
 from ..avalanche_utils import get_balance_back, get_contract_events
