@@ -6,14 +6,18 @@ from fastapi.testclient import TestClient
 from service.server import app
 from service.settings import config
 from service.rest import avalanche_methods
-
+from service.models import BlockchainName
+from service.avalanche_utils import get_blockchain_w3
 
 app.include_router(avalanche_methods.router)
 client = TestClient(app)
 
 
 def test_get_events():
-    response = client.get("/api/events/21767581/")
+    web3 = get_blockchain_w3(BlockchainName.Avalanche)
+    latest_block = web3.eth.get_block('latest')['number']
+    from_block = int(latest_block) - 1000
+    response = client.get(f"/api/events/{from_block}/")
     assert response.status_code == 200
 
     if len(json.loads(response.content)) > 0:

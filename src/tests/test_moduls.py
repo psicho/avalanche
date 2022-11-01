@@ -40,7 +40,9 @@ def test_get_blockchain_w3():
 
 
 def test_get_contract_events():
-    from_block = 21767581
+    web3 = get_blockchain_w3(BlockchainName.Avalanche)
+    latest_block = web3.eth.get_block('latest')['number']
+    from_block = int(latest_block) - 1000
     events_history = get_contract_events(from_block)
 
     if len(events_history) > 0:
