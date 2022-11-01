@@ -10,8 +10,6 @@ COPY . /application
 RUN apk upgrade \
  && apk add gcc musl-dev zlib-dev jpeg-dev python3-dev py3-setuptools
 
-
-RUN pip install --no-cache-dir --upgrade -r /application/requirements.txt
-
-CMD ["uvicorn", "service.server:app", "--host", "127.0.0.0", "--port", "8000"]
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
